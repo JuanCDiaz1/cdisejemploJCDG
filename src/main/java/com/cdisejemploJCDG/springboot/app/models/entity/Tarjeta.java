@@ -41,7 +41,7 @@ public class Tarjeta implements Serializable {
 	@DateTimeFormat(pattern="yyy-MM-dd")
 	private Date vencimiento;
 	
-	@JoinColumn(name="cuenta", referencedColumnName="id", nullable= false)
+	@JoinColumn(name="cuenta", referencedColumnName="id", nullable= true)
 	@ManyToOne(optional= false, fetch=FetchType.LAZY)
 	private Cuenta cuenta;
 

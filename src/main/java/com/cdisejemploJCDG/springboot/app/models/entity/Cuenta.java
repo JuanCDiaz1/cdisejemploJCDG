@@ -2,15 +2,19 @@ package com.cdisejemploJCDG.springboot.app.models.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 import io.micrometer.common.lang.NonNull;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
@@ -43,6 +47,9 @@ public class Cuenta implements Serializable{
    @Temporal(TemporalType.DATE)
    @DateTimeFormat(pattern="yyyy-MM-dd")
    private Date diaCreacion;
+   
+  @OneToMany(fetch=FetchType.LAZY, mappedBy="cuenta", cascade = CascadeType.MERGE)
+   private List<Tarjeta> tarjetas;
 
 public Long getId() {
 	return id;
@@ -87,4 +94,12 @@ public void setDiaCreacion(Date diaCreacion) {
 public static long getSerialversionuid() {
 	return serialVersionUID;
 }
+public List<Tarjeta> getTarjetas() {
+	return tarjetas;
+}
+
+public void setTarjetas(List<Tarjeta> tarjetas) {
+	this.tarjetas = tarjetas;
+}
+
 }
